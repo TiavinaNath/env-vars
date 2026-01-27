@@ -3,7 +3,6 @@ package com.example.demo.env;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.example.demo.conf.FacadeIT;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -13,7 +12,8 @@ public class TestEnvVar extends FacadeIT {
 
   private String getVolaApiUrl = System.getenv("VOLA_API_URL");
 
-  private String getPropertyVolaApiUrl = System.getProperty("orange.api.url");
+  @Value("${api.key}")
+  private String apiKey;
 
   @Test
   void test_value() {
@@ -28,9 +28,8 @@ public class TestEnvVar extends FacadeIT {
   }
 
   @Test
-  @Disabled
-  void test_get_property() {
-    var value = "azertyuiop/123456789";
-    assertEquals(value, getPropertyVolaApiUrl);
+  void test_api_key() {
+    var value = "api/key/test-value";
+    assertEquals(value, apiKey);
   }
 }
