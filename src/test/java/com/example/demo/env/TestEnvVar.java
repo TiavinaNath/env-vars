@@ -12,6 +12,8 @@ public class TestEnvVar extends FacadeIT {
 
   private String getVolaApiUrl = System.getenv("VOLA_API_URL");
 
+  private String getPropertyVolaApiUrl = System.getProperty("orange.api.url");
+
   @Test
   void test_value() {
     var value = "azertyuiop/123456789";
@@ -22,5 +24,11 @@ public class TestEnvVar extends FacadeIT {
   void test_get_env() {
     var value = "azertyuiop/123456789";
     assertEquals(value, getVolaApiUrl);
+  }
+
+  @Test
+  void test_get_property() {
+    var value = "azertyuiop/123456789";
+    assertEquals(value, getPropertyVolaApiUrl);
   }
 }
