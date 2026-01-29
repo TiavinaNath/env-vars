@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 
 public class TestEnvVar extends FacadeIT {
-  @Value("${vola.api.url}")
+  @Value("${VOLA_API_URL}")
   private String volaApiUrl;
 
   private String getVolaApiUrl = System.getenv("VOLA_API_URL");
 
-  @Value("${api.key}")
+  @Value("${API_KEY}")
   private String apiKey;
 
   @Test
