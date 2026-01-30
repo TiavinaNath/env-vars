@@ -32,6 +32,12 @@ jobs:
               (github.ref == 'refs/heads/prod') && secrets.PROD_API_KEY ||
               (github.ref == 'refs/heads/preprod') && secrets.PREPROD_API_KEY
               }}
+      ORANGE_API_URL: ${{
+              (github.event_name == 'pull_request' && github.base_ref == 'prod') && secrets.PROD_ORANGE_API_URL ||
+              (github.event_name == 'pull_request' && github.base_ref == 'preprod') && secrets.PREPROD_ORANGE_API_URL ||
+              (github.ref == 'refs/heads/prod') && secrets.PROD_ORANGE_API_URL ||
+              (github.ref == 'refs/heads/preprod') && secrets.PREPROD_ORANGE_API_URL
+              }}
 
 
     steps:
@@ -44,7 +50,10 @@ jobs:
       - run: chmod +x gradlew
       - run: chmod +x .shell/publish_gen_to_maven_local.sh
       - run: |
-          ./gradlew test
+          ./gradlew test \
+            -Dvola.api.url="$VOLA_API_URL" \
+            -Dapi.key="$API_KEY" \
+            -Dorange.api.url="$ORANGE_API_URL"
 
       
 
